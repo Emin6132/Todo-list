@@ -36,7 +36,39 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      message: "",
+      editing: false,
+      editingId: 0,
+      lists: ["Wake Up", "Wash face"],
+    };
+  },
+  methods: {
+    add: function () {
+      if (this.message !== "") {
+        if (this.editing) {
+          this.lists[this.editingId] = this.message;
+          (this.message = ""), (this.editingId = false);
+        } else {
+          this.lists.push(this.message), (this.message = "");
+        }
+      }
+    },
+    remove: function (index) {
+      this.lists.splice(index, 1);
+    },
+    edit: function (index) {
+      (this.message = this.lists[index]),
+        (this.editing = true),
+        (this.editingId = index);
+    },
+  },
+};
+</script>
 <style>
 body {
   background-color: mintcream;
