@@ -59,6 +59,9 @@ export default {
         }
       }
     },
+    remove: function (index) {
+      this.lists.splice(index, 1);
+    },
   },
 };
 </script>
