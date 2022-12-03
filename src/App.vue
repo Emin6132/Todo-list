@@ -23,12 +23,9 @@
               :key="list"
             >
               <span class="message">{{ list }}</span>
-              <div class="btn-group">
-                <button class="btn btn-danger" @click="remove(index)">
-                  Delete
-                </button>
-                <button class="btn btn-info" @click="edit(index)">Edit</button>
-              </div>
+              <button class="btn btn-danger" @click="remove(index)">
+                Delete
+              </button>
             </li>
           </div>
         </div>
@@ -44,8 +41,21 @@ export default {
       message: "",
       editing: false,
       editingId: 0,
-      lists: ["Wake Up", "Wash face"],
+      lists: [],
     };
+  },
+  mounted() {
+    if (localStorage.lists) {
+      this.lists = JSON.parse(localStorage.lists);
+    }
+  },
+  watch: {
+    lists: {
+      handler(message) {
+        localStorage.lists = JSON.stringify(message);
+      },
+      deep: true,
+    },
   },
   methods: {
     add: function () {
@@ -60,11 +70,6 @@ export default {
     },
     remove: function (index) {
       this.lists.splice(index, 1);
-    },
-    edit: function (index) {
-      (this.message = this.lists[index]),
-        (this.editing = true),
-        (this.editingId = index);
     },
   },
 };
@@ -101,6 +106,7 @@ body {
   flex-direction: column;
 }
 .form-control {
+  text-align: center;
   border-radius: 4px;
   border: none;
   box-shadow: 1px 1px 10px 4px lightgray;
@@ -128,22 +134,13 @@ body {
 .message {
   margin-left: 10px;
 }
-.btn-group {
-  display: flex;
-  width: 38%;
-  justify-content: space-around;
-}
 .btn {
+  margin-right: 10px;
+  background-color: tomato;
   cursor: pointer;
   border: none;
   border-radius: 3px;
   color: white;
   height: 30px;
-}
-.btn-danger {
-  background-color: tomato;
-}
-.btn-info {
-  background-color: rgb(0, 174, 255);
 }
 </style>
