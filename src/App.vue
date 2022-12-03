@@ -106,7 +106,7 @@ body {
   flex-direction: column;
 }
 .form-control {
-  text-align: center;
+  text-align: center ;
   border-radius: 4px;
   border: none;
   box-shadow: 1px 1px 10px 4px lightgray;
